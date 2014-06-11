@@ -5,9 +5,12 @@
  */
 package de.jensheuschkel.JStickyNote.App;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -22,7 +25,6 @@ import javax.swing.SwingUtilities;
 public final class Note extends javax.swing.JFrame {
 
     private static final Logger LOG = Logger.getLogger(Note.class.getName());
-
     private final String id;
     private NoteColor color = ColorSet.getInstance().getColorById(0);
 
@@ -110,6 +112,11 @@ public final class Note extends javax.swing.JFrame {
             }
         });
 
+        URL url = ClassLoader.getSystemResource("de/jensheuschkel/JStickyNote/icons/appIcon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(url);
+        this.setIconImage(img);
+
         NoteRegistry.getInstance().registerNote(this);
     }
 
@@ -141,7 +148,9 @@ public final class Note extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 204));
         setBounds(new java.awt.Rectangle(100, 100, 100, 100));
+        setMinimumSize(new java.awt.Dimension(300, 300));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(300, 300));
 
         noteBarPanel.setBackground(new java.awt.Color(242, 242, 193));
 
@@ -204,7 +213,7 @@ public final class Note extends javax.swing.JFrame {
             }
         });
 
-        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonOptions.png"))); // NOI18N
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonSave.png"))); // NOI18N
         saveButton.setBorder(null);
         saveButton.setBorderPainted(false);
         saveButton.setContentAreaFilled(false);
@@ -214,7 +223,7 @@ public final class Note extends javax.swing.JFrame {
             }
         });
 
-        closeAllButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonOptions.png"))); // NOI18N
+        closeAllButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonCloseAll.png"))); // NOI18N
         closeAllButton.setBorder(null);
         closeAllButton.setBorderPainted(false);
         closeAllButton.setContentAreaFilled(false);
@@ -236,18 +245,18 @@ public final class Note extends javax.swing.JFrame {
                 .addComponent(saveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reloadButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(closeAllButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optionsButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(resizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         noteBarPanelLayout.setVerticalGroup(
             noteBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(noteBarPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(noteBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(noteBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +286,6 @@ public final class Note extends javax.swing.JFrame {
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
-
             @Override
             public void run() {
                 Note note = new Note(IdGenerator.generateRandomId());
@@ -334,7 +342,6 @@ public final class Note extends javax.swing.JFrame {
         }
         NoteRegistry.getInstance().closeAll();
     }//GEN-LAST:event_closeAllButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeAllButton;
     private javax.swing.JButton closeButton;
@@ -350,5 +357,4 @@ public final class Note extends javax.swing.JFrame {
     private javax.swing.JButton resizeButton;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
-
 }
