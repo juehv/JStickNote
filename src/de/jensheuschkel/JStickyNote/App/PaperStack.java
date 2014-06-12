@@ -73,8 +73,7 @@ public class PaperStack {
 
     public void saveStackToFile() throws IOException {
         try {
-            //TODO load path from prefs
-            String pathString = "./jstickynote.xml";
+            String pathString = Preferences.getInstance().getSavePath();
             Path path = Paths.get(pathString);
             ArrayList<String> xmlList = new ArrayList<>();
             xmlList.add(this.toXml());
@@ -88,8 +87,7 @@ public class PaperStack {
 
     public static void loadStackFromFile() throws IOException {
         try {
-            //TODO load path from prefs
-            String pathString = "./jstickynote.xml";
+            String pathString = Preferences.getInstance().getSavePath();
             Path path = Paths.get(pathString);
             List<String> xmlFileStrings = Files.readAllLines(path, ENCODING);
             StringBuilder sb = new StringBuilder();

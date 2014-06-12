@@ -5,6 +5,15 @@
  */
 package de.jensheuschkel.JStickyNote.App;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jens
@@ -47,6 +56,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         noteFileLabel = new javax.swing.JLabel();
         noteFileTextField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -90,7 +103,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         noteFileLabel.setText("Note File:");
 
-        noteFileTextField.setText("./jstickynote.xml");
+        noteFileTextField.setText(Preferences.getInstance().getSavePath());
 
         browseButton.setText("...");
 
@@ -124,6 +137,36 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Preferences", jPanel2);
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("JStickyNote\n(c) Jens Heuschkel\nv1.0 Beta\n\nLicense: GPL v3\njstickynote@juehv-tech.de");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jButton1.setText("Donate");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("About", jPanel3);
+
         jButton2.setText("OK");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,11 +197,15 @@ public class OptionsDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // get color
+        // color
         NoteColor color = ColorSet.getInstance()
                 .getColorByName(colorComboBox.getSelectedItem().toString());
         note.setNoteColor(color);
-        
+        // savepath
+        if (!noteFileTextField.getText().isEmpty()) {
+            Preferences.getInstance().setSavePath(noteFileTextField.getText());
+        }
+
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -169,10 +216,14 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel colorLabel;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel idTextLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel noteFileLabel;
     private javax.swing.JTextField noteFileTextField;
     // End of variables declaration//GEN-END:variables
