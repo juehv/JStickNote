@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.jensheuschkel.JStickyNote.App;
+package de.jensheuschkel.jstickynote.app;
 
 import java.io.IOException;
 import javax.swing.JOptionPane;
@@ -21,7 +21,6 @@ public class Launcher {
      */
     public static void main(String[] args) {
         try {
-            //TODO load pref
             PaperStack.loadStackFromFile();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error loading File.\n"

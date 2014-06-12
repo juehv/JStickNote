@@ -113,7 +113,7 @@
         <Component class="javax.swing.JButton" name="closeButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/JStickyNote/icons/buttonX.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonX.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -130,7 +130,7 @@
               <Font name="Courier New" size="13" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/JStickyNote/icons/buttonPlus.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonPlus.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -148,7 +148,7 @@
               <Font name="Courier New" size="13" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/JStickyNote/icons/buttonResize.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonResize.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -208,7 +208,7 @@
         <Component class="javax.swing.JButton" name="optionsButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/JStickyNote/icons/buttonOptions.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonOptions.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -223,7 +223,7 @@
         <Component class="javax.swing.JButton" name="reloadButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/JStickyNote/icons/buttonReload.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonReload.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -238,7 +238,7 @@
         <Component class="javax.swing.JButton" name="saveButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/JStickyNote/icons/buttonSave.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonSave.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -253,7 +253,7 @@
         <Component class="javax.swing.JButton" name="closeAllButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/JStickyNote/icons/buttonCloseAll.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonCloseAll.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>

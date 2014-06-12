@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.jensheuschkel.JStickyNote.App;
+package de.jensheuschkel.jstickynote.app;
 
 import com.thoughtworks.xstream.XStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,7 +37,7 @@ public class PaperStack {
     private PaperStack() {
 
     }
-    
+
     public static PaperStack getInstance() {
         if (INSTANCE == null) {
             throw new IllegalStateException("create instance from xml first");
@@ -89,11 +93,19 @@ public class PaperStack {
         try {
             String pathString = Preferences.getInstance().getSavePath();
             Path path = Paths.get(pathString);
-            List<String> xmlFileStrings = Files.readAllLines(path, ENCODING);
+//            List<String> xmlFileStrings = Files.readAllLines(path, ENCODING);
             StringBuilder sb = new StringBuilder();
-            for (String line : xmlFileStrings) {
-                sb.append(line);
+
+//            for (String line : xmlFileStrings) {
+//                sb.append(line);
+//            }
+            try (Scanner scanner = new Scanner(path, ENCODING.name())) {
+                while (scanner.hasNextLine()) {
+                    sb.append(scanner.nextLine());
+                }
+                scanner.close();
             }
+
             PaperStack.fromXml(sb.toString());
         } catch (IOException ex) {
             LOG.log(Level.SEVERE,

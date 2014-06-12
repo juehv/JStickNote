@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.jensheuschkel.JStickyNote.App;
+package de.jensheuschkel.jstickynote.app;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -114,7 +114,7 @@ public final class Note extends javax.swing.JFrame {
             }
         });
 
-        URL url = ClassLoader.getSystemResource("de/jensheuschkel/JStickyNote/icons/appIcon.png");
+        URL url = ClassLoader.getSystemResource("de/jensheuschkel/jstickynote/icons/appIcon.png");
         Toolkit kit = Toolkit.getDefaultToolkit();
         Image img = kit.createImage(url);
         this.setIconImage(img);
@@ -155,7 +155,7 @@ public final class Note extends javax.swing.JFrame {
 
         noteBarPanel.setBackground(new java.awt.Color(242, 242, 193));
 
-        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonX.png"))); // NOI18N
+        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonX.png"))); // NOI18N
         closeButton.setBorder(null);
         closeButton.setContentAreaFilled(false);
         closeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +165,7 @@ public final class Note extends javax.swing.JFrame {
         });
 
         newButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        newButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonPlus.png"))); // NOI18N
+        newButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonPlus.png"))); // NOI18N
         newButton.setBorder(null);
         newButton.setBorderPainted(false);
         newButton.setContentAreaFilled(false);
@@ -176,7 +176,7 @@ public final class Note extends javax.swing.JFrame {
         });
 
         resizeButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        resizeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonResize.png"))); // NOI18N
+        resizeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonResize.png"))); // NOI18N
         resizeButton.setBorder(null);
         resizeButton.setBorderPainted(false);
         resizeButton.setContentAreaFilled(false);
@@ -199,7 +199,7 @@ public final class Note extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(jScrollPane2);
 
-        optionsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonOptions.png"))); // NOI18N
+        optionsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonOptions.png"))); // NOI18N
         optionsButton.setBorder(null);
         optionsButton.setBorderPainted(false);
         optionsButton.setContentAreaFilled(false);
@@ -209,7 +209,7 @@ public final class Note extends javax.swing.JFrame {
             }
         });
 
-        reloadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonReload.png"))); // NOI18N
+        reloadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonReload.png"))); // NOI18N
         reloadButton.setBorder(null);
         reloadButton.setBorderPainted(false);
         reloadButton.setContentAreaFilled(false);
@@ -219,7 +219,7 @@ public final class Note extends javax.swing.JFrame {
             }
         });
 
-        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonSave.png"))); // NOI18N
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonSave.png"))); // NOI18N
         saveButton.setBorder(null);
         saveButton.setBorderPainted(false);
         saveButton.setContentAreaFilled(false);
@@ -229,7 +229,7 @@ public final class Note extends javax.swing.JFrame {
             }
         });
 
-        closeAllButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/JStickyNote/icons/buttonCloseAll.png"))); // NOI18N
+        closeAllButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonCloseAll.png"))); // NOI18N
         closeAllButton.setBorder(null);
         closeAllButton.setBorderPainted(false);
         closeAllButton.setContentAreaFilled(false);
@@ -327,6 +327,15 @@ public final class Note extends javax.swing.JFrame {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void reloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reloadButtonActionPerformed
+        // load new stack
+        try {
+            PaperStack.loadStackFromFile();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error loading File.\n"
+                    + "Using new empty pad.\n\n" + ex.getLocalizedMessage());
+        }
+
+        // reinit app
         NoteRegistry.getInstance().closeAll();
         Note reInit = new Note(IdGenerator.generateRandomId());
         reInit.initRun();
