@@ -49,4 +49,13 @@ public class NoteRegistry {
         }
     }
 
+    public void setAllOnFront(String id) {
+        for (String item : registry.keySet()) {
+            registry.get(item).toFront();
+            registry.get(item).repaint();
+        }
+        registry.get(id).toFront();
+        registry.get(id).repaint();
+    }
+
 }

@@ -9,9 +9,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
@@ -98,7 +100,7 @@ public final class Note extends javax.swing.JFrame {
      *
      * @param id
      */
-    public Note(String id) {
+    public Note(final String id) {
         this.id = id;
 
         initComponents();
@@ -150,7 +152,6 @@ public final class Note extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(100, 100, 100, 100));
         setMinimumSize(new java.awt.Dimension(300, 300));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(300, 300));
 
         noteBarPanel.setBackground(new java.awt.Color(242, 242, 193));
 
@@ -189,6 +190,11 @@ public final class Note extends javax.swing.JFrame {
         noteTextEditoPane.setBorder(null);
         noteTextEditoPane.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         noteTextEditoPane.setAutoscrolls(false);
+        noteTextEditoPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                noteTextEditoPaneMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(noteTextEditoPane);
 
         jScrollPane3.setViewportView(jScrollPane2);
@@ -342,6 +348,14 @@ public final class Note extends javax.swing.JFrame {
         }
         NoteRegistry.getInstance().closeAll();
     }//GEN-LAST:event_closeAllButtonActionPerformed
+
+    private void noteTextEditoPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noteTextEditoPaneMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1
+                && evt.getClickCount() == 2) {
+            NoteRegistry.getInstance().setAllOnFront(id);
+        }
+    }//GEN-LAST:event_noteTextEditoPaneMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeAllButton;
     private javax.swing.JButton closeButton;
