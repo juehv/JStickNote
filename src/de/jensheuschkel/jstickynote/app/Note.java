@@ -150,7 +150,7 @@ public final class Note extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 204));
         setBounds(new java.awt.Rectangle(100, 100, 100, 100));
-        setMinimumSize(new java.awt.Dimension(300, 300));
+        setMinimumSize(new java.awt.Dimension(230, 100));
         setUndecorated(true);
 
         noteBarPanel.setBackground(new java.awt.Color(242, 242, 193));
