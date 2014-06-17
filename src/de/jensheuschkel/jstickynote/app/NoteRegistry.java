@@ -5,6 +5,7 @@
  */
 package de.jensheuschkel.jstickynote.app;
 
+import java.awt.Frame;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +52,7 @@ public class NoteRegistry {
 
     public void setAllOnFront(String id) {
         for (String item : registry.keySet()) {
+            registry.get(item).setState(Frame.NORMAL);
             registry.get(item).toFront();
             registry.get(item).repaint();
         }

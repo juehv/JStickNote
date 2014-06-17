@@ -5,6 +5,7 @@
  */
 package de.jensheuschkel.jstickynote.app;
 
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
@@ -110,7 +112,7 @@ public final class Note extends javax.swing.JFrame {
         noteTextEditoPane.getActionMap().put("save", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                saveNote();
+                NoteRegistry.getInstance().saveAll();
             }
         });
 
@@ -118,6 +120,16 @@ public final class Note extends javax.swing.JFrame {
         Toolkit kit = Toolkit.getDefaultToolkit();
         Image img = kit.createImage(url);
         this.setIconImage(img);
+        
+        this.addWindowStateListener(new WindowStateListener() {
+
+            @Override
+            public void windowStateChanged(WindowEvent e) {
+               if (e.getNewState() == Frame.NORMAL){
+                   NoteRegistry.getInstance().setAllOnFront(id);
+               }
+            }
+        });
 
         NoteRegistry.getInstance().registerNote(this);
     }
@@ -188,7 +200,7 @@ public final class Note extends javax.swing.JFrame {
 
         noteTextEditoPane.setBackground(new java.awt.Color(255, 255, 204));
         noteTextEditoPane.setBorder(null);
-        noteTextEditoPane.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        noteTextEditoPane.setFont(new java.awt.Font("Comic Sans MS", 2, 20)); // NOI18N
         noteTextEditoPane.setAutoscrolls(false);
         noteTextEditoPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -323,7 +335,7 @@ public final class Note extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        this.saveNote();
+        NoteRegistry.getInstance().saveAll();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void reloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reloadButtonActionPerformed
@@ -359,8 +371,7 @@ public final class Note extends javax.swing.JFrame {
     }//GEN-LAST:event_closeAllButtonActionPerformed
 
     private void noteTextEditoPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noteTextEditoPaneMouseClicked
-        if (evt.getButton() == MouseEvent.BUTTON1
-                && evt.getClickCount() == 2) {
+        if (evt.getButton() == MouseEvent.BUTTON1) {
             NoteRegistry.getInstance().setAllOnFront(id);
         }
     }//GEN-LAST:event_noteTextEditoPaneMouseClicked
