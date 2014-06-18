@@ -34,12 +34,15 @@ public class Launcher {
         } catch (Exception ex) {
             // empty
         }
+        
+        
 
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
             public void run() {
-
+                IconDummy cont = new IconDummy();
+                cont.setVisible(true);
                 Note note = new Note(IdGenerator.generateRandomId());
                 note.initRun();
 //                note.setVisible(true);

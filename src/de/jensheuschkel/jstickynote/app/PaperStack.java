@@ -6,9 +6,6 @@
 package de.jensheuschkel.jstickynote.app;
 
 import com.thoughtworks.xstream.XStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

@@ -6,10 +6,10 @@
 package de.jensheuschkel.jstickynote.app;
 
 import java.awt.Point;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -20,7 +20,7 @@ public class MotionPanel extends JPanel {
 
     private Point initialClick;
     
-    public MotionPanel(final JFrame parent) {
+    public MotionPanel(final Window parent) {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

@@ -21,6 +21,36 @@ import javax.swing.JOptionPane;
 public class OptionsDialog extends javax.swing.JDialog {
 
     private final Note note;
+    private NoteColor selectedColor;
+
+    private void resetColorButtons() {
+        pinkButton.setSelected(false);
+        purpleButton.setSelected(false);
+        redButton.setSelected(false);
+        yellowButton.setSelected(false);
+        jToggleButton7.setSelected(false);
+        jToggleButton8.setSelected(false);
+        jToggleButton9.setSelected(false);
+        blueButton.setSelected(false);
+        greenButton.setSelected(false);
+    }
+
+    private void initColorButtons() {
+        ColorSet cs = ColorSet.getInstance();
+        if (selectedColor == cs.getColorByName("yellow")) {
+            yellowButton.setSelected(true);
+        } else if (selectedColor == cs.getColorByName("blue")) {
+            blueButton.setSelected(true);
+        } else if (selectedColor == cs.getColorByName("red")) {
+            redButton.setSelected(true);
+        } else if (selectedColor == cs.getColorByName("green")) {
+            greenButton.setSelected(true);
+        } else if (selectedColor == cs.getColorByName("purple")) {
+            purpleButton.setSelected(true);
+        } else if (selectedColor == cs.getColorByName("pink")) {
+            pinkButton.setSelected(true);
+        }
+    }
 
     /**
      * Creates new form OptionsDialog
@@ -30,11 +60,13 @@ public class OptionsDialog extends javax.swing.JDialog {
     public OptionsDialog(Note note) {
         super(note, true);
         this.note = note;
+        this.selectedColor = note.getContent().getColor();
         initComponents();
         setLocationRelativeTo(note);
-        for (String color : ColorSet.getInstance().getNames()) {
-            colorComboBox.addItem(color);
-        }
+        initColorButtons();
+//        for (String color : ColorSet.getInstance().getNames()) {
+////            colorComboBox.addItem(color);
+//        }
     }
 
     /**
@@ -49,9 +81,18 @@ public class OptionsDialog extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         colorLabel = new javax.swing.JLabel();
-        colorComboBox = new javax.swing.JComboBox();
         idLabel = new javax.swing.JLabel();
         idTextLabel = new javax.swing.JLabel();
+        ColorPanel = new javax.swing.JPanel();
+        yellowButton = new de.jensheuschkel.jstickynote.app.ColorToggleButton(ColorSet.getInstance().getColorByName("yellow"));
+        blueButton = new ColorToggleButton(ColorSet.getInstance().getColorByName("blue"));
+        redButton = new ColorToggleButton(ColorSet.getInstance().getColorByName("red"));
+        greenButton = new ColorToggleButton(ColorSet.getInstance().getColorByName("green"));
+        purpleButton = new ColorToggleButton(ColorSet.getInstance().getColorByName("purple"));
+        pinkButton = new ColorToggleButton(ColorSet.getInstance().getColorByName("pink"));
+        jToggleButton7 = new javax.swing.JToggleButton();
+        jToggleButton8 = new javax.swing.JToggleButton();
+        jToggleButton9 = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         noteFileLabel = new javax.swing.JLabel();
         noteFileTextField = new javax.swing.JTextField();
@@ -70,6 +111,126 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         idTextLabel.setText(note.getId());
 
+        yellowButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        yellowButton.setForeground(new java.awt.Color(255, 255, 204));
+        yellowButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        yellowButton.setPreferredSize(new java.awt.Dimension(30, 30));
+        yellowButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yellowButtonActionPerformed(evt);
+            }
+        });
+
+        blueButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        blueButton.setForeground(new java.awt.Color(153, 204, 255));
+        blueButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        blueButton.setPreferredSize(new java.awt.Dimension(30, 30));
+        blueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blueButtonActionPerformed(evt);
+            }
+        });
+
+        redButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        redButton.setForeground(new java.awt.Color(255, 204, 204));
+        redButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        redButton.setPreferredSize(new java.awt.Dimension(30, 30));
+        redButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redButtonActionPerformed(evt);
+            }
+        });
+
+        greenButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        greenButton.setForeground(new java.awt.Color(204, 255, 204));
+        greenButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        greenButton.setPreferredSize(new java.awt.Dimension(30, 30));
+        greenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                greenButtonActionPerformed(evt);
+            }
+        });
+
+        purpleButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        purpleButton.setForeground(new java.awt.Color(224, 204, 255));
+        purpleButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        purpleButton.setPreferredSize(new java.awt.Dimension(30, 30));
+        purpleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                purpleButtonActionPerformed(evt);
+            }
+        });
+
+        pinkButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        pinkButton.setForeground(new java.awt.Color(255, 173, 225));
+        pinkButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        pinkButton.setPreferredSize(new java.awt.Dimension(30, 30));
+        pinkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pinkButtonActionPerformed(evt);
+            }
+        });
+
+        jToggleButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jToggleButton7.setText("X");
+        jToggleButton7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jToggleButton7.setEnabled(false);
+        jToggleButton7.setPreferredSize(new java.awt.Dimension(30, 30));
+
+        jToggleButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jToggleButton8.setText("X");
+        jToggleButton8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jToggleButton8.setEnabled(false);
+        jToggleButton8.setPreferredSize(new java.awt.Dimension(30, 30));
+
+        jToggleButton9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jToggleButton9.setText("X");
+        jToggleButton9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jToggleButton9.setEnabled(false);
+        jToggleButton9.setPreferredSize(new java.awt.Dimension(30, 30));
+
+        javax.swing.GroupLayout ColorPanelLayout = new javax.swing.GroupLayout(ColorPanel);
+        ColorPanel.setLayout(ColorPanelLayout);
+        ColorPanelLayout.setHorizontalGroup(
+            ColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ColorPanelLayout.createSequentialGroup()
+                .addComponent(yellowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(blueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(redButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(ColorPanelLayout.createSequentialGroup()
+                .addComponent(greenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(purpleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pinkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(ColorPanelLayout.createSequentialGroup()
+                .addComponent(jToggleButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        ColorPanelLayout.setVerticalGroup(
+            ColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ColorPanelLayout.createSequentialGroup()
+                .addGroup(ColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(yellowButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(blueButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(redButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(greenButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(purpleButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pinkButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,8 +243,8 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(idTextLabel)
-                    .addComponent(colorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                    .addComponent(ColorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,10 +254,10 @@ public class OptionsDialog extends javax.swing.JDialog {
                     .addComponent(idLabel)
                     .addComponent(idTextLabel))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(colorLabel)
-                    .addComponent(colorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(156, Short.MAX_VALUE))
+                    .addComponent(ColorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Note Options", jPanel1);
@@ -208,9 +369,10 @@ public class OptionsDialog extends javax.swing.JDialog {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         // color
-        NoteColor color = ColorSet.getInstance()
-                .getColorByName(colorComboBox.getSelectedItem().toString());
-        note.setNoteColor(color);
+//        NoteColor color = ColorSet.getInstance()
+//                .getColorByName(colorComboBox.getSelectedItem().toString());
+//        note.setNoteColor(color);
+        note.setNoteColor(selectedColor);
         // savepath
         if (!noteFileTextField.getText().isEmpty()) {
             Preferences.getInstance().setSavePath(noteFileTextField.getText());
@@ -222,7 +384,7 @@ public class OptionsDialog extends javax.swing.JDialog {
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         JFileChooser fc = new JFileChooser(noteFileTextField.getText());
         int result = fc.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION){
+        if (result == JFileChooser.APPROVE_OPTION) {
             String newPath = fc.getSelectedFile().getAbsolutePath();
             noteFileTextField.setText(newPath);
         }
@@ -241,12 +403,50 @@ public class OptionsDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_donateButtonActionPerformed
 
+    private void yellowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yellowButtonActionPerformed
+        resetColorButtons();
+        yellowButton.setSelected(true);
+        selectedColor = ColorSet.getInstance().getColorByName("yellow");
+    }//GEN-LAST:event_yellowButtonActionPerformed
+
+    private void blueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blueButtonActionPerformed
+        resetColorButtons();
+        blueButton.setSelected(true);
+        selectedColor = ColorSet.getInstance().getColorByName("blue");
+    }//GEN-LAST:event_blueButtonActionPerformed
+
+    private void redButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redButtonActionPerformed
+        resetColorButtons();
+        redButton.setSelected(true);
+        selectedColor = ColorSet.getInstance().getColorByName("red");
+    }//GEN-LAST:event_redButtonActionPerformed
+
+    private void greenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenButtonActionPerformed
+        resetColorButtons();
+        greenButton.setSelected(true);
+        selectedColor = ColorSet.getInstance().getColorByName("green");
+    }//GEN-LAST:event_greenButtonActionPerformed
+
+    private void purpleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purpleButtonActionPerformed
+        resetColorButtons();
+        purpleButton.setSelected(true);
+        selectedColor = ColorSet.getInstance().getColorByName("purple");
+    }//GEN-LAST:event_purpleButtonActionPerformed
+
+    private void pinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinkButtonActionPerformed
+        resetColorButtons();
+        pinkButton.setSelected(true);
+        selectedColor = ColorSet.getInstance().getColorByName("pink");
+    }//GEN-LAST:event_pinkButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ColorPanel;
+    private javax.swing.JToggleButton blueButton;
     private javax.swing.JButton browseButton;
-    private javax.swing.JComboBox colorComboBox;
     private javax.swing.JLabel colorLabel;
     private javax.swing.JButton donateButton;
+    private javax.swing.JToggleButton greenButton;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel idTextLabel;
     private javax.swing.JPanel jPanel1;
@@ -255,8 +455,15 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JToggleButton jToggleButton7;
+    private javax.swing.JToggleButton jToggleButton8;
+    private javax.swing.JToggleButton jToggleButton9;
     private javax.swing.JLabel noteFileLabel;
     private javax.swing.JTextField noteFileTextField;
     private javax.swing.JButton okButton;
+    private javax.swing.JToggleButton pinkButton;
+    private javax.swing.JToggleButton purpleButton;
+    private javax.swing.JToggleButton redButton;
+    private javax.swing.JToggleButton yellowButton;
     // End of variables declaration//GEN-END:variables
 }

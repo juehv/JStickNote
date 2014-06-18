@@ -18,6 +18,7 @@ public class NoteRegistry {
     private static NoteRegistry INSTANCE;
 
     private final Map<String, Note> registry = new HashMap<String, Note>();
+    private Frame iconDummy;
 
     private NoteRegistry() {
 
@@ -49,15 +50,35 @@ public class NoteRegistry {
             registry.get(item).saveNote();
         }
     }
-
-    public void setAllOnFront(String id) {
+    
+    public void setAllOnFront() {
         for (String item : registry.keySet()) {
-            registry.get(item).setState(Frame.NORMAL);
+          //  registry.get(item).setState(Frame.NORMAL);
             registry.get(item).toFront();
             registry.get(item).repaint();
         }
+    }
+    
+    public void setAllToBack() {
+        for (String item : registry.keySet()) {
+//           registry.get(item).setState(Frame.ICONIFIED);
+            registry.get(item).toBack();
+            registry.get(item).repaint();
+        }
+    }
+
+    public void setAllOnFront(String id) {
+        setAllOnFront();
         registry.get(id).toFront();
         registry.get(id).repaint();
+    }
+    
+    public void registerIconDummy (Frame container){
+        this.iconDummy = container;
+    }
+    
+    public void closeIconDummy(){
+        this.iconDummy.dispose();
     }
 
 }

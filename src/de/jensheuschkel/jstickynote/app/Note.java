@@ -5,17 +5,20 @@
  */
 package de.jensheuschkel.jstickynote.app;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
@@ -26,11 +29,12 @@ import javax.swing.SwingUtilities;
  *
  * @author Jens
  */
-public final class Note extends javax.swing.JFrame {
+public final class Note extends javax.swing.JDialog {
 
     private static final Logger LOG = Logger.getLogger(Note.class.getName());
     private final String id;
     private NoteColor color = ColorSet.getInstance().getColorById(0);
+    private Font noteFont;
 
     public String getId() {
         return id;
@@ -107,6 +111,18 @@ public final class Note extends javax.swing.JFrame {
 
         initComponents();
 
+        // load font
+        try {
+            InputStream is = Note.class.getResourceAsStream("/de/jensheuschkel/jstickynote/font/eots.ttf");
+            noteFont = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (FontFormatException | IOException ex) {
+            Logger.getLogger(Note.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (noteFont != null) {
+            noteTextEditoPane.setFont(noteFont.deriveFont(24.0f));
+        }
+
+        // add strg+s support
         noteTextEditoPane.getInputMap().put(KeyStroke
                 .getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK), "save");
         noteTextEditoPane.getActionMap().put("save", new AbstractAction() {
@@ -116,21 +132,23 @@ public final class Note extends javax.swing.JFrame {
             }
         });
 
-        URL url = ClassLoader.getSystemResource("de/jensheuschkel/jstickynote/icons/appIcon.png");
-        Toolkit kit = Toolkit.getDefaultToolkit();
-        Image img = kit.createImage(url);
-        this.setIconImage(img);
-        
+//        // set program icon
+//        URL url = ClassLoader.getSystemResource("de/jensheuschkel/jstickynote/icons/appIcon.png");
+//        Toolkit kit = Toolkit.getDefaultToolkit();
+//        Image img = kit.createImage(url);
+//        this.setIconImage(img);
+        // set all to front if one window is aktivated
         this.addWindowStateListener(new WindowStateListener() {
 
             @Override
             public void windowStateChanged(WindowEvent e) {
-               if (e.getNewState() == Frame.NORMAL){
-                   NoteRegistry.getInstance().setAllOnFront(id);
-               }
+                if (e.getNewState() == Frame.NORMAL) {
+                    NoteRegistry.getInstance().setAllOnFront(id);
+                }
             }
         });
 
+        // register note 
         NoteRegistry.getInstance().registerNote(this);
     }
 
@@ -159,7 +177,6 @@ public final class Note extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jTextPane1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 204));
         setBounds(new java.awt.Rectangle(100, 100, 100, 100));
         setMinimumSize(new java.awt.Dimension(230, 100));
@@ -200,7 +217,7 @@ public final class Note extends javax.swing.JFrame {
 
         noteTextEditoPane.setBackground(new java.awt.Color(255, 255, 204));
         noteTextEditoPane.setBorder(null);
-        noteTextEditoPane.setFont(new java.awt.Font("Comic Sans MS", 2, 20)); // NOI18N
+        noteTextEditoPane.setFont(new java.awt.Font("Comic Sans MS", 2, 22)); // NOI18N
         noteTextEditoPane.setAutoscrolls(false);
         noteTextEditoPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -367,6 +384,7 @@ public final class Note extends javax.swing.JFrame {
         if (result == JOptionPane.YES_OPTION) {
             NoteRegistry.getInstance().saveAll();
         }
+        NoteRegistry.getInstance().closeIconDummy();
         NoteRegistry.getInstance().closeAll();
     }//GEN-LAST:event_closeAllButtonActionPerformed
 

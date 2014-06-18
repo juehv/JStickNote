@@ -5,11 +5,8 @@
  */
 package de.jensheuschkel.jstickynote.app;
 
-import java.awt.Component;
+import java.awt.Window;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 
 /**
  *
@@ -22,7 +19,7 @@ public class ResizeButton extends JButton {
     private int y1 = 0;
     private int y2 = 0;
     
-    public ResizeButton(final JFrame parent) {
+    public ResizeButton(final Window parent) {
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
