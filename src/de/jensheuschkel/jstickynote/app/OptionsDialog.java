@@ -372,7 +372,6 @@ public class OptionsDialog extends javax.swing.JDialog {
 //        NoteColor color = ColorSet.getInstance()
 //                .getColorByName(colorComboBox.getSelectedItem().toString());
 //        note.setNoteColor(color);
-        note.setNoteColor(selectedColor);
         // savepath
         if (!noteFileTextField.getText().isEmpty()) {
             Preferences.getInstance().setSavePath(noteFileTextField.getText());
@@ -407,36 +406,48 @@ public class OptionsDialog extends javax.swing.JDialog {
         resetColorButtons();
         yellowButton.setSelected(true);
         selectedColor = ColorSet.getInstance().getColorByName("yellow");
+        note.setNoteColor(selectedColor);
+        this.dispose();
     }//GEN-LAST:event_yellowButtonActionPerformed
 
     private void blueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blueButtonActionPerformed
         resetColorButtons();
         blueButton.setSelected(true);
         selectedColor = ColorSet.getInstance().getColorByName("blue");
+        note.setNoteColor(selectedColor);
+        this.dispose();
     }//GEN-LAST:event_blueButtonActionPerformed
 
     private void redButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redButtonActionPerformed
         resetColorButtons();
         redButton.setSelected(true);
         selectedColor = ColorSet.getInstance().getColorByName("red");
+        note.setNoteColor(selectedColor);
+        this.dispose();
     }//GEN-LAST:event_redButtonActionPerformed
 
     private void greenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenButtonActionPerformed
         resetColorButtons();
         greenButton.setSelected(true);
         selectedColor = ColorSet.getInstance().getColorByName("green");
+        note.setNoteColor(selectedColor);
+        this.dispose();
     }//GEN-LAST:event_greenButtonActionPerformed
 
     private void purpleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purpleButtonActionPerformed
         resetColorButtons();
         purpleButton.setSelected(true);
         selectedColor = ColorSet.getInstance().getColorByName("purple");
+        note.setNoteColor(selectedColor);
+        this.dispose();
     }//GEN-LAST:event_purpleButtonActionPerformed
 
     private void pinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinkButtonActionPerformed
         resetColorButtons();
         pinkButton.setSelected(true);
         selectedColor = ColorSet.getInstance().getColorByName("pink");
+        note.setNoteColor(selectedColor);
+        this.dispose();
     }//GEN-LAST:event_pinkButtonActionPerformed
 
 

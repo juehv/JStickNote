@@ -35,6 +35,7 @@ public final class Note extends javax.swing.JDialog {
     private final String id;
     private NoteColor color = ColorSet.getInstance().getColorById(0);
     private Font noteFont;
+    private NoteSaveScheduler scheduler = NoteSaveScheduler.getInstance();
 
     public String getId() {
         return id;
@@ -81,6 +82,21 @@ public final class Note extends javax.swing.JDialog {
         }
     }
 
+    public void reloadNotes() {
+        // load new stack
+        try {
+            PaperStack.loadStackFromFile();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error loading File.\n"
+                    + "Using new empty pad.\n\n" + ex.getLocalizedMessage());
+        }
+
+        // reinit app
+        NoteRegistry.getInstance().closeAll();
+        Note reInit = new Note(IdGenerator.generateRandomId());
+        reInit.initRun();
+    }
+
     public Note(NoteContent content) {
         this(content.getId());
 
@@ -122,13 +138,23 @@ public final class Note extends javax.swing.JDialog {
             noteTextEditoPane.setFont(noteFont.deriveFont(24.0f));
         }
 
-        // add strg+s support
+        // add strg+s --> save
         noteTextEditoPane.getInputMap().put(KeyStroke
                 .getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK), "save");
         noteTextEditoPane.getActionMap().put("save", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 NoteRegistry.getInstance().saveAll();
+            }
+        });
+
+        // add strg+r --> reload
+        noteTextEditoPane.getInputMap().put(KeyStroke
+                .getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_MASK), "reload");
+        noteTextEditoPane.getActionMap().put("reload", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reloadNotes();
             }
         });
 
@@ -222,6 +248,11 @@ public final class Note extends javax.swing.JDialog {
         noteTextEditoPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 noteTextEditoPaneMouseClicked(evt);
+            }
+        });
+        noteTextEditoPane.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                noteTextEditoPaneKeyTyped(evt);
             }
         });
         jScrollPane2.setViewportView(noteTextEditoPane);
@@ -346,6 +377,7 @@ public final class Note extends javax.swing.JDialog {
                         + ex.getLocalizedMessage());
             }
             NoteRegistry.getInstance().unregisterNote(this.id);
+            NoteRegistry.getInstance().saveAll();
             this.setVisible(false);
             this.dispose();
         }
@@ -356,25 +388,14 @@ public final class Note extends javax.swing.JDialog {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void reloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reloadButtonActionPerformed
-        // load new stack
-        try {
-            PaperStack.loadStackFromFile();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error loading File.\n"
-                    + "Using new empty pad.\n\n" + ex.getLocalizedMessage());
-        }
-
-        // reinit app
-        NoteRegistry.getInstance().closeAll();
-        Note reInit = new Note(IdGenerator.generateRandomId());
-        reInit.initRun();
+        reloadNotes();
     }//GEN-LAST:event_reloadButtonActionPerformed
 
     private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsButtonActionPerformed
         OptionsDialog options = new OptionsDialog(this);
         options.setVisible(true);
-
         this.repaint();
+        NoteRegistry.getInstance().saveAll();
     }//GEN-LAST:event_optionsButtonActionPerformed
 
     private void closeAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeAllButtonActionPerformed
@@ -394,6 +415,15 @@ public final class Note extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_noteTextEditoPaneMouseClicked
 
+    private void noteTextEditoPaneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noteTextEditoPaneKeyTyped
+        if (evt.getKeyChar() == KeyEvent.VK_TAB) {
+            int cursorPostition = noteTextEditoPane.getCaretPosition();
+            noteTextEditoPane.setText(noteTextEditoPane.getText().replaceAll("\\t", "    "));
+            noteTextEditoPane.setCaretPosition(cursorPostition + 3);
+        }
+        scheduler.scheduleSave();
+    }//GEN-LAST:event_noteTextEditoPaneKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeAllButton;
     private javax.swing.JButton closeButton;
@@ -409,4 +439,5 @@ public final class Note extends javax.swing.JDialog {
     private javax.swing.JButton resizeButton;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
+
 }

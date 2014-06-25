@@ -27,6 +27,11 @@ public class MotionPanel extends JPanel {
                 initialClick = e.getPoint();
                 getComponentAt(initialClick);
             }
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                NoteRegistry.getInstance().saveAll();
+            }
         });
 
         addMouseMotionListener(new MouseMotionAdapter() {
