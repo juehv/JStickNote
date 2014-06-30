@@ -25,6 +25,7 @@ import java.util.TimerTask;
  */
 public class NoteSaveScheduler {
 
+    private static final long SCHEDULE_TIME = 15000;
     private static NoteSaveScheduler INSTANCE;
     private boolean schedule = false;
     private final Timer timer = new Timer();
@@ -39,7 +40,7 @@ public class NoteSaveScheduler {
                 }
                 schedule = false;
             }
-        }, 30000, 30000);
+        }, SCHEDULE_TIME, SCHEDULE_TIME);
     }
 
     public static NoteSaveScheduler getInstance() {

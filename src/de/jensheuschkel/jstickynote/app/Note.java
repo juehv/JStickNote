@@ -8,8 +8,6 @@ package de.jensheuschkel.jstickynote.app;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Frame;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -17,7 +15,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -198,7 +195,6 @@ public final class Note extends javax.swing.JDialog {
         noteTextEditoPane = new javax.swing.JEditorPane();
         optionsButton = new javax.swing.JButton();
         reloadButton = new javax.swing.JButton();
-        saveButton = new javax.swing.JButton();
         closeAllButton = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jTextPane1);
@@ -211,6 +207,7 @@ public final class Note extends javax.swing.JDialog {
         noteBarPanel.setBackground(new java.awt.Color(242, 242, 193));
 
         closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonX.png"))); // NOI18N
+        closeButton.setToolTipText("Remove Note");
         closeButton.setBorder(null);
         closeButton.setContentAreaFilled(false);
         closeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -221,6 +218,7 @@ public final class Note extends javax.swing.JDialog {
 
         newButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         newButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonPlus.png"))); // NOI18N
+        newButton.setToolTipText("New Note");
         newButton.setBorder(null);
         newButton.setBorderPainted(false);
         newButton.setContentAreaFilled(false);
@@ -232,6 +230,7 @@ public final class Note extends javax.swing.JDialog {
 
         resizeButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         resizeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonResize.png"))); // NOI18N
+        resizeButton.setToolTipText("Resize");
         resizeButton.setBorder(null);
         resizeButton.setBorderPainted(false);
         resizeButton.setContentAreaFilled(false);
@@ -260,6 +259,7 @@ public final class Note extends javax.swing.JDialog {
         jScrollPane3.setViewportView(jScrollPane2);
 
         optionsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonOptions.png"))); // NOI18N
+        optionsButton.setToolTipText("Options");
         optionsButton.setBorder(null);
         optionsButton.setBorderPainted(false);
         optionsButton.setContentAreaFilled(false);
@@ -270,6 +270,7 @@ public final class Note extends javax.swing.JDialog {
         });
 
         reloadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonReload.png"))); // NOI18N
+        reloadButton.setToolTipText("Reload File");
         reloadButton.setBorder(null);
         reloadButton.setBorderPainted(false);
         reloadButton.setContentAreaFilled(false);
@@ -279,17 +280,8 @@ public final class Note extends javax.swing.JDialog {
             }
         });
 
-        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonSave.png"))); // NOI18N
-        saveButton.setBorder(null);
-        saveButton.setBorderPainted(false);
-        saveButton.setContentAreaFilled(false);
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
-
         closeAllButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonCloseAll.png"))); // NOI18N
+        closeAllButton.setToolTipText("Exit App");
         closeAllButton.setBorder(null);
         closeAllButton.setBorderPainted(false);
         closeAllButton.setContentAreaFilled(false);
@@ -308,10 +300,8 @@ public final class Note extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reloadButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(closeAllButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optionsButton)
@@ -332,7 +322,6 @@ public final class Note extends javax.swing.JDialog {
                         .addGroup(noteBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(resizeButton)
                             .addComponent(closeButton)))
-                    .addComponent(saveButton)
                     .addComponent(closeAllButton)))
         );
 
@@ -382,10 +371,6 @@ public final class Note extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_closeButtonActionPerformed
-
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        NoteRegistry.getInstance().saveAll();
-    }//GEN-LAST:event_saveButtonActionPerformed
 
     private void reloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reloadButtonActionPerformed
         reloadNotes();
@@ -437,7 +422,6 @@ public final class Note extends javax.swing.JDialog {
     private javax.swing.JButton optionsButton;
     private javax.swing.JButton reloadButton;
     private javax.swing.JButton resizeButton;
-    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
 }
