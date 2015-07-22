@@ -184,20 +184,19 @@ public final class Note extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
         noteBarPanel = new MotionPanel(this);
         closeButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         resizeButton = new ResizeButton(this);
         jScrollPane3 = new javax.swing.JScrollPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        noteTextEditoPane = new javax.swing.JEditorPane();
+        noteTextEditoPane = new javax.swing.JEditorPane(){
+            public boolean getScrollableTracksViewportWidth() {
+                return true;
+            }
+        };
         optionsButton = new javax.swing.JButton();
         reloadButton = new javax.swing.JButton();
         closeAllButton = new javax.swing.JButton();
-
-        jScrollPane1.setViewportView(jTextPane1);
 
         setBackground(new java.awt.Color(255, 255, 204));
         setBounds(new java.awt.Rectangle(100, 100, 100, 100));
@@ -238,8 +237,6 @@ public final class Note extends javax.swing.JDialog {
         jScrollPane3.setBorder(null);
         jScrollPane3.setHorizontalScrollBar(null);
 
-        jScrollPane2.setBorder(null);
-
         noteTextEditoPane.setBackground(new java.awt.Color(255, 255, 204));
         noteTextEditoPane.setBorder(null);
         noteTextEditoPane.setFont(new java.awt.Font("Comic Sans MS", 2, 22)); // NOI18N
@@ -254,9 +251,7 @@ public final class Note extends javax.swing.JDialog {
                 noteTextEditoPaneKeyTyped(evt);
             }
         });
-        jScrollPane2.setViewportView(noteTextEditoPane);
-
-        jScrollPane3.setViewportView(jScrollPane2);
+        jScrollPane3.setViewportView(noteTextEditoPane);
 
         optionsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonOptions.png"))); // NOI18N
         optionsButton.setToolTipText("Options");
@@ -394,12 +389,6 @@ public final class Note extends javax.swing.JDialog {
         NoteRegistry.getInstance().closeAll();
     }//GEN-LAST:event_closeAllButtonActionPerformed
 
-    private void noteTextEditoPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noteTextEditoPaneMouseClicked
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            NoteRegistry.getInstance().setAllOnFront(id);
-        }
-    }//GEN-LAST:event_noteTextEditoPaneMouseClicked
-
     private void noteTextEditoPaneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noteTextEditoPaneKeyTyped
         if (evt.getKeyChar() == KeyEvent.VK_TAB) {
             int cursorPostition = noteTextEditoPane.getCaretPosition();
@@ -409,13 +398,16 @@ public final class Note extends javax.swing.JDialog {
         scheduler.scheduleSave();
     }//GEN-LAST:event_noteTextEditoPaneKeyTyped
 
+    private void noteTextEditoPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noteTextEditoPaneMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            NoteRegistry.getInstance().setAllOnFront(id);
+        }
+    }//GEN-LAST:event_noteTextEditoPaneMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeAllButton;
     private javax.swing.JButton closeButton;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton newButton;
     private javax.swing.JPanel noteBarPanel;
     private javax.swing.JEditorPane noteTextEditoPane;
