@@ -17,7 +17,7 @@ public class IdGenerator {
         Random rand = new Random();
         StringBuilder sb = new StringBuilder();
 
-        sb.append(System.currentTimeMillis()).append("_")
+        sb.append(System.currentTimeMillis()).append("-")
                 .append(Math.abs(rand.nextInt(99)));
 
         return sb.toString();

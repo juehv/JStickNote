@@ -481,26 +481,6 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="browseButton" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="noteFileLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="activeFileRadioButton1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="noteFileTextField1" pref="200" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="browseButton1" min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="noteFileLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="activeFileRadioButton2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="noteFileTextField2" pref="200" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="browseButton2" min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -519,27 +499,7 @@
                           <Component id="noteFileTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="browseButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="noteFileLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="activeFileRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="noteFileTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="browseButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="noteFileLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="activeFileRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="noteFileTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="browseButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="164" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -553,7 +513,7 @@
             <Component class="javax.swing.JTextField" name="noteFileTextField">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="Preferences.getInstance().getSavePath1()" type="code"/>
+                  <Connection code="Preferences.getInstance().getActiveSavePath()" type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -570,64 +530,6 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="active"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="activeFileRadioButton1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="active"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="noteFileLabel1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Note Path 2:"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="noteFileTextField1">
-              <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="Preferences.getInstance().getSavePath2()" type="code"/>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="browseButton1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseButton1ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="activeFileRadioButton2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="active"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="noteFileLabel2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Note Path 3:"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="noteFileTextField2">
-              <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="Preferences.getInstance().getSavePath3()" type="code"/>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="browseButton2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseButton2ActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

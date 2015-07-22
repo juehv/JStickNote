@@ -5,6 +5,7 @@
  */
 package de.jensheuschkel.jstickynote.app;
 
+import java.nio.file.Paths;
 import java.util.UUID;
 
 /**
@@ -13,12 +14,9 @@ import java.util.UUID;
  */
 public class Preferences {
 
-    public static final String ID_SAVE_PATH1 = "savepath1";
-    public static final String ID_SAVE_PATH1_ACTIVE = "savepath1_active";
-    public static final String ID_SAVE_PATH2 = "savepath2";
-    public static final String ID_SAVE_PATH2_ACTIVE = "savepath2_active";
-    public static final String ID_SAVE_PATH3 = "savepath3";
-    public static final String ID_SAVE_PATH3_ACTIVE = "savepath3_active";
+    public static final String ID_SAVE_PATH = "savepath_";
+    public static final String ID_SAVE_IDS = "savepath_ids";
+    public static final String ID_ACTIVE_SAVE_PATH_ID = "active_savepath";
     public static final String ID_DEIVCE_UUID = "device_id";
     public static final String DEF_SAVE_PATH = "./notes/";
     private static Preferences INSTANCE;
@@ -36,52 +34,60 @@ public class Preferences {
         return INSTANCE;
     }
 
-    public void setSavePath1(String path) {
-        prefs.put(ID_SAVE_PATH1, path);
+    public void setSavePath(String id, String path) {
+        // mach die haare schön
+        path = path.replaceAll("\\\\", "/");
+        if (!(path.endsWith("/") || path.endsWith("\\"))) {
+            path += "/";
+        }
+        //save
+        prefs.put(ID_SAVE_PATH + id, path);
+
+        // Check if id is there
+        boolean found = false;
+        String[] ids = this.getAllSavePathIds();
+        for (String item : ids) {
+            if (item.equalsIgnoreCase(id)) {
+                found = true;
+                break;
+            }
+        }
+        // add new id if not
+        if (!found) {
+            String rawIds = prefs.get(ID_SAVE_IDS, "");
+            if (rawIds.isEmpty()) {
+                rawIds += ";";
+            }
+            rawIds += id;
+            prefs.put(ID_SAVE_IDS, rawIds);
+        }
     }
 
-    public String getSavePath1() {
-        return prefs.get(ID_SAVE_PATH1, DEF_SAVE_PATH);
+    public String getActiveSavePath() {
+        String id = prefs.get(ID_ACTIVE_SAVE_PATH_ID, "");
+        // if ID is empty prefs will return the def anyway
+        return prefs.get(ID_SAVE_PATH + id, DEF_SAVE_PATH);
     }
 
-    public void setSavePath1Active(boolean isActive) {
-        prefs.putBoolean(ID_SAVE_PATH1_ACTIVE, isActive);
+    public void setActiveSavePath(String id) {
+        prefs.put(ID_ACTIVE_SAVE_PATH_ID, id);
     }
 
-    public boolean isSavePath1Active() {
-        return prefs.getBoolean(ID_SAVE_PATH1_ACTIVE, true);
+    public String[] getAllSavePathIds() {
+        String rawIds = prefs.get(ID_SAVE_IDS, "");
+        String[] ids = rawIds.split(";");
+        //TODO preprocessing ?!
+        return ids;
     }
 
-    public void setSavePath2(String path) {
-        prefs.put(ID_SAVE_PATH2, path);
-    }
-
-    public String getSavePath2() {
-        return prefs.get(ID_SAVE_PATH2, DEF_SAVE_PATH);
-    }
-
-    public void setSavePath2Active(boolean isActive) {
-        prefs.putBoolean(ID_SAVE_PATH2_ACTIVE, isActive);
-    }
-
-    public boolean isSavePath2Active() {
-        return prefs.getBoolean(ID_SAVE_PATH2_ACTIVE, false);
-    }
-
-    public void setSavePath3(String path) {
-        prefs.put(ID_SAVE_PATH3, path);
-    }
-
-    public String getSavePath3() {
-        return prefs.get(ID_SAVE_PATH3, DEF_SAVE_PATH);
-    }
-
-    public void setSavePath3Active(boolean isActive) {
-        prefs.putBoolean(ID_SAVE_PATH3_ACTIVE, isActive);
-    }
-
-    public boolean isSavePath3Active() {
-        return prefs.getBoolean(ID_SAVE_PATH3_ACTIVE, false);
+    public void putSavePathIds(String[] ids) {
+        StringBuilder sb = new StringBuilder();
+        for (String id : ids) {
+            sb.append(id).append(";");
+        }
+        // remove the last ;
+        sb.deleteCharAt(sb.length() - 1);
+        prefs.put(ID_SAVE_IDS, sb.toString());
     }
 
     public String getDeviceUuid() {

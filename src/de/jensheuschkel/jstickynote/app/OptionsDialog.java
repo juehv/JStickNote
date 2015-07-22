@@ -105,14 +105,6 @@ public class OptionsDialog extends javax.swing.JDialog {
         noteFileTextField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
         activeFileRadioButton = new javax.swing.JRadioButton();
-        activeFileRadioButton1 = new javax.swing.JRadioButton();
-        noteFileLabel1 = new javax.swing.JLabel();
-        noteFileTextField1 = new javax.swing.JTextField();
-        browseButton1 = new javax.swing.JButton();
-        activeFileRadioButton2 = new javax.swing.JRadioButton();
-        noteFileLabel2 = new javax.swing.JLabel();
-        noteFileTextField2 = new javax.swing.JTextField();
-        browseButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         websiteButton = new javax.swing.JButton();
@@ -339,7 +331,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         noteFileLabel.setText("Note Path 1:");
 
-        noteFileTextField.setText(Preferences.getInstance().getSavePath1());
+        noteFileTextField.setText(Preferences.getInstance().getActiveSavePath());
 
         browseButton.setText("...");
         browseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -350,40 +342,6 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         activeFileRadioButton.setSelected(true);
         activeFileRadioButton.setText("active");
-
-        activeFileRadioButton1.setText("active");
-        activeFileRadioButton1.setEnabled(false);
-
-        noteFileLabel1.setText("Note Path 2:");
-        noteFileLabel1.setEnabled(false);
-
-        noteFileTextField1.setText(Preferences.getInstance().getSavePath2());
-        noteFileTextField1.setEnabled(false);
-
-        browseButton1.setText("...");
-        browseButton1.setEnabled(false);
-        browseButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseButton1ActionPerformed(evt);
-            }
-        });
-
-        activeFileRadioButton2.setText("active");
-        activeFileRadioButton2.setEnabled(false);
-
-        noteFileLabel2.setText("Note Path 3:");
-        noteFileLabel2.setEnabled(false);
-
-        noteFileTextField2.setText(Preferences.getInstance().getSavePath3());
-        noteFileTextField2.setEnabled(false);
-
-        browseButton2.setText("...");
-        browseButton2.setEnabled(false);
-        browseButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -399,23 +357,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(noteFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(browseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(noteFileLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(activeFileRadioButton1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(noteFileTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(browseButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(noteFileLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(activeFileRadioButton2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(noteFileTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(browseButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(browseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -429,23 +371,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(noteFileTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseButton))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(noteFileLabel1)
-                    .addComponent(activeFileRadioButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(noteFileTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browseButton1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(noteFileLabel2)
-                    .addComponent(activeFileRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(noteFileTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browseButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Paths", jPanel2);
@@ -586,21 +512,12 @@ public class OptionsDialog extends javax.swing.JDialog {
 //        note.setNoteColor(color);
         // savepath
         if (!noteFileTextField.getText().isEmpty()) {
-            Preferences.getInstance().setSavePath1(noteFileTextField.getText());
+            Preferences.getInstance().setSavePath("def", noteFileTextField.getText());
+            Preferences.getInstance().setActiveSavePath("def");
         }
 
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
-
-    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
-        JFileChooser fc = new JFileChooser(noteFileTextField.getText());
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int result = fc.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            String newPath = fc.getSelectedFile().getAbsolutePath();
-            noteFileTextField.setText(newPath);
-        }
-    }//GEN-LAST:event_browseButtonActionPerformed
 
     private void donateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donateButtonActionPerformed
         try {
@@ -676,24 +593,22 @@ public class OptionsDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_websiteButtonActionPerformed
 
-    private void browseButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_browseButton2ActionPerformed
-
-    private void browseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_browseButton1ActionPerformed
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
+        JFileChooser fc = new JFileChooser(noteFileTextField.getText());
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int result = fc.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String newPath = fc.getSelectedFile().getAbsolutePath();
+            noteFileTextField.setText(newPath);
+        }
+    }//GEN-LAST:event_browseButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ColorPanel;
     private javax.swing.JRadioButton activeFileRadioButton;
-    private javax.swing.JRadioButton activeFileRadioButton1;
-    private javax.swing.JRadioButton activeFileRadioButton2;
     private javax.swing.JToggleButton blueButton;
     private javax.swing.JButton browseButton;
-    private javax.swing.JButton browseButton1;
-    private javax.swing.JButton browseButton2;
     private javax.swing.JLabel colorLabel;
     private javax.swing.JButton donateButton;
     private javax.swing.JToggleButton greenButton;
@@ -724,11 +639,7 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JToggleButton jToggleButton9;
     private javax.swing.JLabel noteFileLabel;
-    private javax.swing.JLabel noteFileLabel1;
-    private javax.swing.JLabel noteFileLabel2;
     private javax.swing.JTextField noteFileTextField;
-    private javax.swing.JTextField noteFileTextField1;
-    private javax.swing.JTextField noteFileTextField2;
     private javax.swing.JButton okButton;
     private javax.swing.JToggleButton pinkButton;
     private javax.swing.JToggleButton purpleButton;

@@ -5,8 +5,8 @@
  */
 package de.jensheuschkel.jstickynote.app;
 
-import com.thoughtworks.xstream.XStream;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -28,7 +28,8 @@ import java.util.logging.Logger;
 public class PaperStack {
 
     private static final Logger LOG = Logger.getLogger(PaperStack.class.getName());
-    final static Charset ENCODING = StandardCharsets.UTF_8;
+    private final static Charset ENCODING = StandardCharsets.UTF_8;
+    private static final String SUFFIX = ".jsn";
     private static PaperStack INSTANCE;
     private final Map<String, NoteContent> notes = new HashMap<>();
 
@@ -50,6 +51,7 @@ public class PaperStack {
         }
         notes.put(note.getId(), note);
         LOG.log(Level.INFO, "Add note with id:{0}", note.getId());
+        // save all .. y not :D
         saveStackToFile();
     }
 
@@ -58,7 +60,8 @@ public class PaperStack {
             notes.remove(noteId);
             LOG.log(Level.INFO, "Remove note with id:{0}", noteId);
         }
-        saveStackToFile();
+        // remove corresbonding file
+        removeNoteFile(noteId);
     }
 
     public NoteContent getNote(String Id) {
@@ -73,23 +76,16 @@ public class PaperStack {
         return retVal;
     }
 
+    public void removeNoteFile(String id) throws IOException {
+        String pathString = Preferences.getInstance().getActiveSavePath();
+        pathString += id + SUFFIX;
+        Files.delete(Paths.get(pathString));
+    }
+
     public void saveStackToFile() throws IOException {
         try {
             // prepare folder
-            String pathString;
-            if (Preferences.getInstance().isSavePath1Active()) {
-                pathString = Preferences.getInstance().getSavePath1();
-            } else if (Preferences.getInstance().isSavePath2Active()) {
-                pathString = Preferences.getInstance().getSavePath2();
-            } else if (Preferences.getInstance().isSavePath3Active()) {
-                pathString = Preferences.getInstance().getSavePath3();
-            } else {
-                Preferences.getInstance().setSavePath1Active(true);
-                pathString = Preferences.getInstance().getSavePath1();
-            }
-            if (!(pathString.endsWith("/") || pathString.endsWith("\\"))) {
-                pathString += "/";
-            }
+            String pathString = Preferences.getInstance().getActiveSavePath();
             (new File(pathString)).mkdirs();
             // save files
 //            ArrayList<String> xmlList = new ArrayList<>();
@@ -100,7 +96,7 @@ public class PaperStack {
                 ArrayList<String> xmlLines = new ArrayList<>();
                 xmlLines.add(note.toXml());
                 // prepare path
-                Path path = Paths.get(pathString + note.getId() + ".xml");
+                Path path = Paths.get(pathString + note.getId() + SUFFIX);
                 // write file
                 Files.write(path, xmlLines, ENCODING);
             }
@@ -116,29 +112,29 @@ public class PaperStack {
         INSTANCE = new PaperStack();
         // fill stack with notes from files
         try {
-            String pathString;
-            if (Preferences.getInstance().isSavePath1Active()) {
-                pathString = Preferences.getInstance().getSavePath1();
-            } else if (Preferences.getInstance().isSavePath2Active()) {
-                pathString = Preferences.getInstance().getSavePath2();
-            } else if (Preferences.getInstance().isSavePath3Active()) {
-                pathString = Preferences.getInstance().getSavePath3();
-            } else {
-                Preferences.getInstance().setSavePath1Active(true);
-                pathString = Preferences.getInstance().getSavePath1();
-            }
+            String pathString = Preferences.getInstance().getActiveSavePath();
             File saveFolder = new File(pathString);
 
-            for (File noteFile : saveFolder.listFiles()) {
-                StringBuilder sb = new StringBuilder();
-                Path path = Paths.get(noteFile.getAbsolutePath());
-                try (Scanner scanner = new Scanner(path, ENCODING.name())) {
-                    while (scanner.hasNextLine()) {
-                        sb.append(scanner.nextLine());
-                    }
-                    scanner.close();
+            File[] noteFiles = saveFolder.listFiles(new FileFilter() {
+
+                @Override
+                public boolean accept(File pathname) {
+                    return pathname.getName().endsWith(SUFFIX);
                 }
-                INSTANCE.addNote(NoteContent.fromXml(sb.toString()));
+            });
+
+            if (noteFiles != null && noteFiles.length != 0) {
+                for (File noteFile : noteFiles) {
+                    StringBuilder sb = new StringBuilder();
+                    Path path = Paths.get(noteFile.getAbsolutePath());
+                    try (Scanner scanner = new Scanner(path, ENCODING.name())) {
+                        while (scanner.hasNextLine()) {
+                            sb.append(scanner.nextLine());
+                        }
+                        scanner.close();
+                    }
+                    INSTANCE.addNote(NoteContent.fromXml(sb.toString()));
+                }
             }
 
 //            PaperStack.fromXml(sb.toString());
