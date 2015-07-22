@@ -337,9 +337,9 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Groups", jPanel5);
 
-        noteFileLabel.setText("Note File 1:");
+        noteFileLabel.setText("Note Path 1:");
 
-        noteFileTextField.setText(Preferences.getInstance().getSavePath());
+        noteFileTextField.setText(Preferences.getInstance().getSavePath1());
 
         browseButton.setText("...");
         browseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -354,10 +354,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         activeFileRadioButton1.setText("active");
         activeFileRadioButton1.setEnabled(false);
 
-        noteFileLabel1.setText("Note File 2:");
+        noteFileLabel1.setText("Note Path 2:");
         noteFileLabel1.setEnabled(false);
 
-        noteFileTextField1.setText(Preferences.getInstance().getSavePath());
+        noteFileTextField1.setText(Preferences.getInstance().getSavePath2());
         noteFileTextField1.setEnabled(false);
 
         browseButton1.setText("...");
@@ -371,10 +371,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         activeFileRadioButton2.setText("active");
         activeFileRadioButton2.setEnabled(false);
 
-        noteFileLabel2.setText("Note File 3:");
+        noteFileLabel2.setText("Note Path 3:");
         noteFileLabel2.setEnabled(false);
 
-        noteFileTextField2.setText(Preferences.getInstance().getSavePath());
+        noteFileTextField2.setText(Preferences.getInstance().getSavePath3());
         noteFileTextField2.setEnabled(false);
 
         browseButton2.setText("...");
@@ -397,7 +397,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(activeFileRadioButton))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(noteFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(noteFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(browseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -448,7 +448,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Files", jPanel2);
+        jTabbedPane1.addTab("Paths", jPanel2);
 
         jLabel1.setText("Shortcuts:");
 
@@ -586,7 +586,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 //        note.setNoteColor(color);
         // savepath
         if (!noteFileTextField.getText().isEmpty()) {
-            Preferences.getInstance().setSavePath(noteFileTextField.getText());
+            Preferences.getInstance().setSavePath1(noteFileTextField.getText());
         }
 
         this.dispose();
@@ -594,6 +594,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         JFileChooser fc = new JFileChooser(noteFileTextField.getText());
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int result = fc.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             String newPath = fc.getSelectedFile().getAbsolutePath();
@@ -662,14 +663,6 @@ public class OptionsDialog extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_pinkButtonActionPerformed
 
-    private void browseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_browseButton1ActionPerformed
-
-    private void browseButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_browseButton2ActionPerformed
-
     private void websiteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_websiteButtonActionPerformed
          try {
             Desktop.getDesktop().browse(new URI(
@@ -682,6 +675,14 @@ public class OptionsDialog extends javax.swing.JDialog {
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_websiteButtonActionPerformed
+
+    private void browseButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_browseButton2ActionPerformed
+
+    private void browseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_browseButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,7 @@
 package de.jensheuschkel.jstickynote.app;
 
 import com.thoughtworks.xstream.XStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -74,11 +75,35 @@ public class PaperStack {
 
     public void saveStackToFile() throws IOException {
         try {
-            String pathString = Preferences.getInstance().getSavePath();
-            Path path = Paths.get(pathString);
-            ArrayList<String> xmlList = new ArrayList<>();
-            xmlList.add(this.toXml());
-            Files.write(path, xmlList, ENCODING);
+            // prepare folder
+            String pathString;
+            if (Preferences.getInstance().isSavePath1Active()) {
+                pathString = Preferences.getInstance().getSavePath1();
+            } else if (Preferences.getInstance().isSavePath2Active()) {
+                pathString = Preferences.getInstance().getSavePath2();
+            } else if (Preferences.getInstance().isSavePath3Active()) {
+                pathString = Preferences.getInstance().getSavePath3();
+            } else {
+                Preferences.getInstance().setSavePath1Active(true);
+                pathString = Preferences.getInstance().getSavePath1();
+            }
+            if (!(pathString.endsWith("/") || pathString.endsWith("\\"))) {
+                pathString += "/";
+            }
+            (new File(pathString)).mkdirs();
+            // save files
+//            ArrayList<String> xmlList = new ArrayList<>();
+//            xmlList.add(this.toXml());
+//            Files.write(path, xmlList, ENCODING);
+            for (NoteContent note : notes.values()) {
+                // prepare xml
+                ArrayList<String> xmlLines = new ArrayList<>();
+                xmlLines.add(note.toXml());
+                // prepare path
+                Path path = Paths.get(pathString + note.getId() + ".xml");
+                // write file
+                Files.write(path, xmlLines, ENCODING);
+            }
         } catch (IOException ex) {
             LOG.log(Level.SEVERE,
                     "Error while writing file.", ex);
@@ -87,47 +112,60 @@ public class PaperStack {
     }
 
     public static void loadStackFromFile() throws IOException {
+        // create new stack
+        INSTANCE = new PaperStack();
+        // fill stack with notes from files
         try {
-            String pathString = Preferences.getInstance().getSavePath();
-            Path path = Paths.get(pathString);
-//            List<String> xmlFileStrings = Files.readAllLines(path, ENCODING);
-            StringBuilder sb = new StringBuilder();
+            String pathString;
+            if (Preferences.getInstance().isSavePath1Active()) {
+                pathString = Preferences.getInstance().getSavePath1();
+            } else if (Preferences.getInstance().isSavePath2Active()) {
+                pathString = Preferences.getInstance().getSavePath2();
+            } else if (Preferences.getInstance().isSavePath3Active()) {
+                pathString = Preferences.getInstance().getSavePath3();
+            } else {
+                Preferences.getInstance().setSavePath1Active(true);
+                pathString = Preferences.getInstance().getSavePath1();
+            }
+            File saveFolder = new File(pathString);
 
-//            for (String line : xmlFileStrings) {
-//                sb.append(line);
-//            }
-            try (Scanner scanner = new Scanner(path, ENCODING.name())) {
-                while (scanner.hasNextLine()) {
-                    sb.append(scanner.nextLine());
+            for (File noteFile : saveFolder.listFiles()) {
+                StringBuilder sb = new StringBuilder();
+                Path path = Paths.get(noteFile.getAbsolutePath());
+                try (Scanner scanner = new Scanner(path, ENCODING.name())) {
+                    while (scanner.hasNextLine()) {
+                        sb.append(scanner.nextLine());
+                    }
+                    scanner.close();
                 }
-                scanner.close();
+                INSTANCE.addNote(NoteContent.fromXml(sb.toString()));
             }
 
-            PaperStack.fromXml(sb.toString());
+//            PaperStack.fromXml(sb.toString());
         } catch (Exception ex) {
             LOG.log(Level.SEVERE,
                     null, ex);
-            PaperStack.fromXml(null);
+//            PaperStack.fromXml(null);
             throw ex;
         }
     }
 
-    public String toXml() {
-        XStream xml = new XStream();
-        return xml.toXML(this);
-    }
-
-    public static void fromXml(String xmlString) {
-        if (xmlString == null || xmlString.isEmpty()) {
-            INSTANCE = new PaperStack();
-        } else {
-            XStream xml = new XStream();
-            INSTANCE = (PaperStack) xml.fromXML(xmlString);
-            if (INSTANCE == null) {
-                INSTANCE = new PaperStack();
-                LOG.warning("Failed to parse xml string. Using empty pad.");
-            }
-        }
-
-    }
+//    public String toXml() {
+//        XStream xml = new XStream();
+//        return xml.toXML(this);
+//    }
+//
+//    public static void fromXml(String xmlString) {
+//        if (xmlString == null || xmlString.isEmpty()) {
+//            INSTANCE = new PaperStack();
+//        } else {
+//            XStream xml = new XStream();
+//            INSTANCE = (PaperStack) xml.fromXML(xmlString);
+//            if (INSTANCE == null) {
+//                INSTANCE = new PaperStack();
+//                LOG.warning("Failed to parse xml string. Using empty pad.");
+//            }
+//        }
+//
+//    }
 }

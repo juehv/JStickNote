@@ -5,6 +5,7 @@
  */
 package de.jensheuschkel.jstickynote.app;
 
+import com.thoughtworks.xstream.XStream;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.HashMap;
@@ -67,4 +68,17 @@ public class NoteContent {
         this.color = color;
     }
 
+    public String toXml(){
+        XStream xml = new XStream();
+        return xml.toXML(this);
+    }
+    
+    public static NoteContent fromXml(String xmlString){
+        if (xmlString == null || xmlString.isEmpty()) {
+            return null;
+        } else {
+            XStream xml = new XStream();
+            return (NoteContent) xml.fromXML(xmlString);
+        }
+    }
 }
