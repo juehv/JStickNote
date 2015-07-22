@@ -362,6 +362,9 @@ public final class Note extends javax.swing.JDialog {
             }
             NoteRegistry.getInstance().unregisterNote(this.id);
 //            NoteRegistry.getInstance().saveAll();
+            if (NoteRegistry.getInstance().isEmpty()) {
+                System.exit(0);
+            }
             this.setVisible(false);
             this.dispose();
         }
@@ -373,16 +376,16 @@ public final class Note extends javax.swing.JDialog {
 
     private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsButtonActionPerformed
         OptionsDialog options = new OptionsDialog(this);
-        options.setVisible(true);        
-        
+        options.setVisible(true);
+
         //TODO note specific options in context menu
         // move this stuff above to the context menu closing
         // options menu should just contain local options, help, donation (and group settings??)
         this.repaint();
         NoteRegistry.getInstance().saveAll();
         // end        
-        
-        reloadNotes();        
+
+        reloadNotes();
     }//GEN-LAST:event_optionsButtonActionPerformed
 
     private void closeAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeAllButtonActionPerformed

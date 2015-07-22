@@ -93,5 +93,9 @@ public class NoteRegistry {
             NoteRegistry.getInstance().saveAll();
         }
     }
+    
+    public boolean isEmpty(){
+        return registry.isEmpty();
+    }
 
 }
