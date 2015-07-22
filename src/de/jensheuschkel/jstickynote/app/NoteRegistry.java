@@ -8,6 +8,8 @@ package de.jensheuschkel.jstickynote.app;
 import java.awt.Frame;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,15 +52,15 @@ public class NoteRegistry {
             registry.get(item).saveNote();
         }
     }
-    
+
     public void setAllOnFront() {
         for (String item : registry.keySet()) {
-          //  registry.get(item).setState(Frame.NORMAL);
+            //  registry.get(item).setState(Frame.NORMAL);
             registry.get(item).toFront();
             registry.get(item).repaint();
         }
     }
-    
+
     public void setAllToBack() {
         for (String item : registry.keySet()) {
 //           registry.get(item).setState(Frame.ICONIFIED);
@@ -72,13 +74,24 @@ public class NoteRegistry {
         registry.get(id).toFront();
         registry.get(id).repaint();
     }
-    
-    public void registerIconDummy (Frame container){
+
+    public void registerIconDummy(Frame container) {
         this.iconDummy = container;
     }
-    
-    public void closeIconDummy(){
+
+    public void closeIconDummy() {
         this.iconDummy.dispose();
+
+    }
+
+    void saveAllOnShutdown() {
+        JFrame restoreDummy = new JFrame();
+        System.err.println("ddd");
+        int result = JOptionPane.showConfirmDialog(restoreDummy, "Save all notes ?", null,
+                JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            NoteRegistry.getInstance().saveAll();
+        }
     }
 
 }

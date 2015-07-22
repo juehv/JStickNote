@@ -21,6 +21,7 @@ public class Launcher {
      */
     public static void main(String[] args) {
         try {
+            // Load Notes
             PaperStack.loadStackFromFile();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error loading File.\n"
@@ -34,7 +35,8 @@ public class Launcher {
         } catch (Exception ex) {
             // empty
         }
-        
+
+        // Start App
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
@@ -46,6 +48,7 @@ public class Launcher {
 //                note.setVisible(true);
             }
         });
+
     }
 
 }

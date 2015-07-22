@@ -379,14 +379,10 @@ public final class Note extends javax.swing.JDialog {
     }//GEN-LAST:event_optionsButtonActionPerformed
 
     private void closeAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeAllButtonActionPerformed
-        int result;
-        result = JOptionPane.showConfirmDialog(this, "Save all notes ?", null,
-                JOptionPane.YES_NO_OPTION);
-        if (result == JOptionPane.YES_OPTION) {
-            NoteRegistry.getInstance().saveAll();
-        }
+        NoteRegistry.getInstance().saveAllOnShutdown();
         NoteRegistry.getInstance().closeIconDummy();
         NoteRegistry.getInstance().closeAll();
+        System.exit(0);
     }//GEN-LAST:event_closeAllButtonActionPerformed
 
     private void noteTextEditoPaneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noteTextEditoPaneKeyTyped

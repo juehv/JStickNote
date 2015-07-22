@@ -23,6 +23,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.net.URL;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,18 +36,18 @@ public class IconDummy extends javax.swing.JFrame {
      */
     public IconDummy() {
         initComponents();
-        
+
         setLocation(new Point(0, 0));
-        
+
         URL url = ClassLoader.getSystemResource("de/jensheuschkel/jstickynote/icons/appIcon.png");
         Toolkit kit = Toolkit.getDefaultToolkit();
         Image img = kit.createImage(url);
         this.setIconImage(img);
-        
+
         NoteRegistry.getInstance().registerIconDummy(this);
-        
+
         this.addWindowStateListener(new WindowStateListener() {
-            
+
             @Override
             public void windowStateChanged(WindowEvent e) {
                 if (e.getNewState() != Frame.ICONIFIED) {
@@ -56,9 +57,13 @@ public class IconDummy extends javax.swing.JFrame {
                 }
 //                System.out.println(e.getOldState() + "->" + e.getNewState());
             }
+
+            //DOESNT WORK ?!
+//            public void windowDeactivated(WindowEvent e) {
+//                NoteRegistry.getInstance().saveAllOnShutdown();
+//            }
+
         });
-        
-        NoteRegistry.getInstance().registerIconDummy(this);
     }
 
     /**
@@ -70,7 +75,7 @@ public class IconDummy extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("JStickyNote");
         setUndecorated(true);
 
