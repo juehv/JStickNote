@@ -22,7 +22,7 @@ public class Launcher {
     public static void main(String[] args) {
         try {
             PaperStack.loadStackFromFile();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error loading File.\n"
                     + "Using new empty pad.\n\n" + ex.getLocalizedMessage());
         }

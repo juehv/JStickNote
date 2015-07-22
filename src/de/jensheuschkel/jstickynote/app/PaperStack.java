@@ -104,7 +104,7 @@ public class PaperStack {
             }
 
             PaperStack.fromXml(sb.toString());
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             LOG.log(Level.SEVERE,
                     null, ex);
             PaperStack.fromXml(null);

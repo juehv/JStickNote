@@ -7,6 +7,7 @@ package de.jensheuschkel.jstickynote.app;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,10 +19,11 @@ public class NoteContent {
     private final String id;
     private String text;
     private Dimension size;
-    private Map<String, Point> locations;
+    private final Map<String, Point> locations;
     private NoteColor color;
 
     public NoteContent(String id) {
+        this.locations = new HashMap<>();
         this.id = id;
     }
 

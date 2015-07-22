@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Preferences {
 
     public static final String ID_SAVE_PATH = "savepath";
-    public static final String ID_DEIVCE_UUID = "savepath";
+    public static final String ID_DEIVCE_UUID = "device_id";
     public static final String DEF_SAVE_PATH = "./jstickynote.xml";
     private static Preferences INSTANCE;
     private java.util.prefs.Preferences prefs = java.util.prefs.Preferences
