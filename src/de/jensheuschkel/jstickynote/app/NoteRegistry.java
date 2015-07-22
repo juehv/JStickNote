@@ -17,7 +17,7 @@ public class NoteRegistry {
 
     private static NoteRegistry INSTANCE;
 
-    private final Map<String, Note> registry = new HashMap<String, Note>();
+    private final Map<String, Note> registry = new HashMap<>();
     private Frame iconDummy;
 
     private NoteRegistry() {

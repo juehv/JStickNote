@@ -35,8 +35,6 @@ public class Launcher {
             // empty
         }
         
-        
-
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override

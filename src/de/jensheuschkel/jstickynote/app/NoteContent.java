@@ -7,6 +7,7 @@ package de.jensheuschkel.jstickynote.app;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.Map;
 
 /**
  *
@@ -17,7 +18,7 @@ public class NoteContent {
     private final String id;
     private String text;
     private Dimension size;
-    private Point location;
+    private Map<String, Point> locations;
     private NoteColor color;
 
     public NoteContent(String id) {
@@ -45,11 +46,15 @@ public class NoteContent {
     }
 
     public Point getLocation() {
+        Point location = locations.get(Preferences.getInstance().getDeviceUuid());
+        if (location == null) {
+            location = new Point(10, 10);
+        }
         return location;
     }
 
     public void setLocation(Point location) {
-        this.location = location;
+        locations.put(Preferences.getInstance().getDeviceUuid(), location);
     }
 
     public NoteColor getColor() {
@@ -59,6 +64,5 @@ public class NoteContent {
     public void setColor(NoteColor color) {
         this.color = color;
     }
-    
-    
+
 }
