@@ -49,9 +49,9 @@ public class IconDummy extends javax.swing.JFrame {
             
             @Override
             public void windowStateChanged(WindowEvent e) {
-                if (e.getNewState() == Frame.NORMAL) {
+                if (e.getNewState() != Frame.ICONIFIED) {
                     NoteRegistry.getInstance().setAllOnFront();
-                } else if (e.getNewState() == Frame.ICONIFIED) {
+                } else {
                     NoteRegistry.getInstance().setAllToBack();
                 }
 //                System.out.println(e.getOldState() + "->" + e.getNewState());
