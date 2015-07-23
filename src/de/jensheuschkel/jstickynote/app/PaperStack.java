@@ -79,7 +79,7 @@ public class PaperStack {
     public void removeNoteFile(String id) throws IOException {
         String pathString = Preferences.getInstance().getActiveSavePath();
         pathString += id + SUFFIX;
-        Files.delete(Paths.get(pathString));
+        Files.deleteIfExists(Paths.get(pathString));
     }
 
     public void saveStackToFile() throws IOException {
