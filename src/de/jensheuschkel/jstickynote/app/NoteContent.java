@@ -19,12 +19,11 @@ public class NoteContent {
 
     private final String id;
     private String text;
-    private Dimension size;
-    private final Map<String, Point> locations;
+    private final Map<String, LocalNoteOptions> localOptions;
     private NoteColor color;
 
     public NoteContent(String id) {
-        this.locations = new HashMap<>();
+        this.localOptions = new HashMap<>();
         this.id = id;
     }
 
@@ -41,23 +40,41 @@ public class NoteContent {
     }
 
     public Dimension getSize() {
+        String deviceId = Preferences.getInstance().getDeviceUuid();
+        Dimension size = localOptions.get(deviceId).getSize();
+        if (size == null) {
+            size = LocalNoteOptions.DEFAULT_SIZE;
+        }
         return size;
     }
 
     public void setSize(Dimension size) {
-        this.size = size;
+        String deviceId = Preferences.getInstance().getDeviceUuid();
+        LocalNoteOptions tmpOpt = localOptions.get(deviceId);
+        if (tmpOpt == null){
+            tmpOpt = new LocalNoteOptions();
+            localOptions.put(deviceId,tmpOpt);
+        }
+        tmpOpt.setSize(size);
     }
 
     public Point getLocation() {
-        Point location = locations.get(Preferences.getInstance().getDeviceUuid());
+        String deviceId = Preferences.getInstance().getDeviceUuid();
+        Point location = localOptions.get(deviceId).getLocation();
         if (location == null) {
-            location = new Point(10, 10);
+            location = LocalNoteOptions.DEFAULT_LOCATION;
         }
         return location;
     }
 
     public void setLocation(Point location) {
-        locations.put(Preferences.getInstance().getDeviceUuid(), location);
+        String deviceId = Preferences.getInstance().getDeviceUuid();
+        LocalNoteOptions tmpOpt = localOptions.get(deviceId);
+        if (tmpOpt == null){
+            tmpOpt = new LocalNoteOptions();
+            localOptions.put(deviceId,tmpOpt);
+        }
+        tmpOpt.setLocation(location);
     }
 
     public NoteColor getColor() {

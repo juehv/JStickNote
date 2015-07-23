@@ -123,6 +123,9 @@ public final class Note extends javax.swing.JDialog {
         this.id = id;
 
         initComponents();
+        
+        // set default size (not location because screen center is cooler)
+        this.setSize(LocalNoteOptions.DEFAULT_SIZE);
 
         // load font
         try {
