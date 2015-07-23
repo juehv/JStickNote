@@ -56,19 +56,19 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Component id="closeButton" min="-2" pref="30" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="newButton" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="reloadButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="closeButton" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace pref="112" max="32767" attributes="0"/>
-                  <Component id="closeAllButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="reloadButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="optionsButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="closeAllButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="resizeButton" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -83,7 +83,7 @@
                           <Component id="reloadButton" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="resizeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="closeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="closeButton" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="closeAllButton" min="-2" max="-2" attributes="0"/>
@@ -96,7 +96,7 @@
         <Component class="javax.swing.JButton" name="closeButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonX.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonTrash25.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Remove Note"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -114,7 +114,7 @@
               <Font name="Courier New" size="13" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonPlus.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonNew25.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="New Note"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -184,7 +184,7 @@
         <Component class="javax.swing.JButton" name="optionsButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonOptions.png"/>
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonGear25.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Options"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

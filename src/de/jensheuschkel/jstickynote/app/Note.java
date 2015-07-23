@@ -205,7 +205,7 @@ public final class Note extends javax.swing.JDialog {
 
         noteBarPanel.setBackground(new java.awt.Color(242, 242, 193));
 
-        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonX.png"))); // NOI18N
+        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonTrash25.png"))); // NOI18N
         closeButton.setToolTipText("Remove Note");
         closeButton.setBorder(null);
         closeButton.setContentAreaFilled(false);
@@ -216,7 +216,7 @@ public final class Note extends javax.swing.JDialog {
         });
 
         newButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        newButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonPlus.png"))); // NOI18N
+        newButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonNew25.png"))); // NOI18N
         newButton.setToolTipText("New Note");
         newButton.setBorder(null);
         newButton.setBorderPainted(false);
@@ -253,7 +253,7 @@ public final class Note extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(noteTextEditoPane);
 
-        optionsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonOptions.png"))); // NOI18N
+        optionsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonGear25.png"))); // NOI18N
         optionsButton.setToolTipText("Options");
         optionsButton.setBorder(null);
         optionsButton.setBorderPainted(false);
@@ -291,15 +291,15 @@ public final class Note extends javax.swing.JDialog {
         noteBarPanelLayout.setHorizontalGroup(
             noteBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(noteBarPanelLayout.createSequentialGroup()
-                .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reloadButton)
+                .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addComponent(closeAllButton)
+                .addComponent(reloadButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optionsButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(closeAllButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(resizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
