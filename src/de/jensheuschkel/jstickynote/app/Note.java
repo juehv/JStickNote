@@ -5,6 +5,7 @@
  */
 package de.jensheuschkel.jstickynote.app;
 
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Frame;
@@ -15,6 +16,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.text.Normalizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -123,16 +127,22 @@ public final class Note extends javax.swing.JDialog {
         this.id = id;
 
         initComponents();
-        
+
         // set default size (not location because screen center is cooler)
         this.setSize(LocalNoteOptions.DEFAULT_SIZE);
+
+        // disable mail button if not supported
+        if (!(Desktop.isDesktopSupported()
+                && Desktop.getDesktop().isSupported(Desktop.Action.MAIL))) {
+            sendNoteButton.setVisible(false);
+        }
 
         // load font
         try {
             InputStream is = Note.class.getResourceAsStream("/de/jensheuschkel/jstickynote/font/eots.ttf");
             noteFont = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (FontFormatException | IOException ex) {
-            Logger.getLogger(Note.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
         }
         if (noteFont != null) {
             noteTextEditoPane.setFont(noteFont.deriveFont(24.0f));
@@ -200,6 +210,7 @@ public final class Note extends javax.swing.JDialog {
         optionsButton = new javax.swing.JButton();
         reloadButton = new javax.swing.JButton();
         closeAllButton = new javax.swing.JButton();
+        sendNoteButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
         setBounds(new java.awt.Rectangle(100, 100, 100, 100));
@@ -289,6 +300,17 @@ public final class Note extends javax.swing.JDialog {
             }
         });
 
+        sendNoteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/de/jensheuschkel/jstickynote/icons/buttonMail25.png"))); // NOI18N
+        sendNoteButton.setToolTipText("Reload File");
+        sendNoteButton.setBorder(null);
+        sendNoteButton.setBorderPainted(false);
+        sendNoteButton.setContentAreaFilled(false);
+        sendNoteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendNoteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout noteBarPanelLayout = new javax.swing.GroupLayout(noteBarPanel);
         noteBarPanel.setLayout(noteBarPanelLayout);
         noteBarPanelLayout.setHorizontalGroup(
@@ -297,7 +319,9 @@ public final class Note extends javax.swing.JDialog {
                 .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sendNoteButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(reloadButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optionsButton)
@@ -317,10 +341,10 @@ public final class Note extends javax.swing.JDialog {
                         .addComponent(newButton, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(optionsButton, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(reloadButton)
-                        .addGroup(noteBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(resizeButton)
-                            .addComponent(closeButton)))
-                    .addComponent(closeAllButton)))
+                        .addComponent(closeButton)
+                        .addComponent(resizeButton))
+                    .addComponent(closeAllButton)
+                    .addComponent(sendNoteButton, javax.swing.GroupLayout.Alignment.LEADING)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -413,6 +437,29 @@ public final class Note extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_noteTextEditoPaneMouseClicked
 
+    private void sendNoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendNoteButtonActionPerformed
+        Desktop desktop;
+        if (Desktop.isDesktopSupported()
+                && (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
+            try {
+                // prepare String
+                //http://www.w3schools.com/tags/ref_urlencode.asp
+                // TODO use Stringbuilder and export the static text to some xml file
+                String noteText = noteTextEditoPane.getText();
+                String footer = "\n_________________________________________________________________\nsend with JStickyNote https://github.com/juehv/JStickNote";
+                String emailInput= noteText + footer;
+                String text = java.net.URLEncoder.encode(emailInput.replaceAll(" ", "%20"), "UTF-8").replaceAll("%2520", "%20");
+                URI mailto = new URI("mailto:?subject=JStickyNote&body=" + text);
+                desktop.mail(mailto);
+            } catch (URISyntaxException | IOException ex) {
+                LOG.log(Level.SEVERE, "Error while opening mail application", ex);
+                JOptionPane.showMessageDialog(this, "Error while opening mail application!\n" + ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Sending mails is not supported!");
+        }
+    }//GEN-LAST:event_sendNoteButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeAllButton;
     private javax.swing.JButton closeButton;
@@ -423,6 +470,7 @@ public final class Note extends javax.swing.JDialog {
     private javax.swing.JButton optionsButton;
     private javax.swing.JButton reloadButton;
     private javax.swing.JButton resizeButton;
+    private javax.swing.JButton sendNoteButton;
     // End of variables declaration//GEN-END:variables
 
 }

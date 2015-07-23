@@ -59,7 +59,9 @@
                   <Component id="newButton" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="closeButton" min="-2" pref="30" max="-2" attributes="0"/>
-                  <EmptySpace pref="112" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="sendNoteButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="81" max="32767" attributes="0"/>
                   <Component id="reloadButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="optionsButton" min="-2" max="-2" attributes="0"/>
@@ -81,12 +83,11 @@
                           <Component id="newButton" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="optionsButton" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="reloadButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="resizeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="closeButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="closeButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="resizeButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="closeAllButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="sendNoteButton" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -227,6 +228,22 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="closeAllButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="sendNoteButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/de/jensheuschkel/jstickynote/icons/buttonMail25.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Reload File"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendNoteButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
