@@ -446,7 +446,7 @@ public final class Note extends javax.swing.JDialog {
                 //http://www.w3schools.com/tags/ref_urlencode.asp
                 // TODO use Stringbuilder and export the static text to some xml file
                 String noteText = noteTextEditoPane.getText();
-                String footer = "\n_________________________________________________________________\nsend with JStickyNote https://github.com/juehv/JStickNote";
+                String footer = "\n_________________________________________________________________\nsent with JStickyNote https://github.com/juehv/JStickNote";
                 String emailInput= noteText + footer;
                 String text = java.net.URLEncoder.encode(emailInput.replaceAll(" ", "%20"), "UTF-8").replaceAll("%2520", "%20");
                 URI mailto = new URI("mailto:?subject=JStickyNote&body=" + text);
